@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "di", "FractalPainter/di.csproj", "{4B70F6B3-5C20-40D2-BFC9-D95C18D65DD6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordsCloudGenerator", "WordsCloudGenerator\WordsCloudGenerator.csproj", "{009B693F-0688-4F5C-811D-D659C3923C74}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{4B70F6B3-5C20-40D2-BFC9-D95C18D65DD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B70F6B3-5C20-40D2-BFC9-D95C18D65DD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B70F6B3-5C20-40D2-BFC9-D95C18D65DD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{009B693F-0688-4F5C-811D-D659C3923C74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{009B693F-0688-4F5C-811D-D659C3923C74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{009B693F-0688-4F5C-811D-D659C3923C74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{009B693F-0688-4F5C-811D-D659C3923C74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
