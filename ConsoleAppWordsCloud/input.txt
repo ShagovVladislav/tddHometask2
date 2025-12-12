@@ -1,0 +1,70 @@
+﻿apple
+apple
+banana
+orange 
+orange 
+orange 
+grape
+kiwi 
+mango 
+mango 
+mango
+peach peach pear pear
+plum plum plum cherry
+jackfruit jackfruit jackfruit lychee 
+rambutan rambutan rambutan durian
+persimmon persimmon persimmon pomegranate
+guava guava guava passionfruit
+dragonfruit dragonfruit dragonfruit starfruit
+breadfruit breadfruit breadfruit soursop
+ackee ackee ackee mangosteen
+longan longan longan loquat
+salak salak salak santol
+carambola carambola carambola tamarind
+jabuticaba jabuticaba jabuticaba cupuacu
+genip genip genip genip
+mamey mamey mamey sapote
+canistel canistel canistel black
+sapodilla sapodilla sapodilla white
+sapote sapote sapote green
+yellow yellow yellow red
+blue blue blue purple
+pink pink pink brown
+black black black white
+gray gray gray silver
+gold gold gold bronze
+copper copper copper brass
+steel steel steel iron
+aluminum aluminum aluminum titanium
+zinc zinc zinc nickel
+lead lead lead tin
+mercury mercury mercury platinum
+palladium palladium palladium rhodium
+iridium iridium iridium osmium
+ruthenium ruthenium ruthenium rhenium
+tungsten tungsten tungsten molybdenum
+niobium niobium niobium tantalum
+hafnium hafnium hafnium zirconium
+ytterbium ytterbium ytterbium lutetium
+thulium thulium thulium erbium
+holmium holmium holmium dysprosium
+terbium terbium terbium gadolinium
+europium europium europium samarium
+promethium promethium promethium neodymium
+praseodymium praseodymium praseodymium cerium
+lanthanum lanthanum lanthanum actinium
+thorium thorium thorium protactinium
+uranium uranium uranium neptunium
+plutonium plutonium plutonium americium
+curium curium curium berkelium
+californium californium californium einsteinium
+fermium fermium fermium mendelevium
+nobelium nobelium nobelium lawrencium
+rutherfordium rutherfordium rutherfordium dubnium
+seaborgium seaborgium seaborgium bohrium
+hassium hassium hassium meitnerium
+darmstadtium darmstadtium darmstadtium roentgenium
+copernicium copernicium copernicium nihonium
+flerovium flerovium flerovium moscovium
+livermorium livermorium livermorium tennessine
+oganesson oganesson oganesson
