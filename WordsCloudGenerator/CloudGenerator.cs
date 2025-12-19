@@ -10,9 +10,10 @@ namespace WordsCloudGenerator;
 public class CloudGenerator : ICloudGenerator
 {
     private readonly IFileReader fileReader;
-    private readonly IWordProcessor wordProcessor;
+    private readonly ICloudElementsBuilder cloudElementsBuilder;
     private ICloudLayouterFactory layouterFactory;
     private readonly ICloudVisualizer visualizer;
+    private readonly IImageSaver imageSaver;
 
     private readonly WordsSettings wordsSettings;
     private readonly LayoutSettings layoutSettings;
@@ -23,15 +24,17 @@ public class CloudGenerator : ICloudGenerator
 
     public CloudGenerator(
         IFileReader fileReader,
-        IWordProcessor wordProcessor,
+        ICloudElementsBuilder cloudElementsBuilder,
         ICloudLayouterFactory layouterFactory,
         ICloudVisualizer visualizer,
+        IImageSaver imageSaver,
         WordsSettings wordsSettings,
         LayoutSettings layoutSettings,
         VisualizationSettings visualizationSettings)
     {
         this.fileReader = fileReader;
-        this.wordProcessor = wordProcessor;
+        this.cloudElementsBuilder = cloudElementsBuilder;
+        this.imageSaver = imageSaver;
         this.layouterFactory = layouterFactory;
         this.visualizer = visualizer;
         this.wordsSettings = wordsSettings;
@@ -104,23 +107,33 @@ public class CloudGenerator : ICloudGenerator
         return this;
     }
 
-    public void Generate()
+    public Result Generate()
     {
         if (string.IsNullOrWhiteSpace(inputFile))
-            throw new InvalidOperationException("Input file is not specified");
+            return Result.Fail("Input file is not specified");
 
-        var words = fileReader.ReadWords(inputFile).Value;
-        var elements = wordProcessor.ProcessWords(words).Value;
+        return fileReader.ReadWords(inputFile)
+            .Then(words =>
+                cloudElementsBuilder.ProcessWords(words))
+            .Then(elements =>
+            {
+                var fontRange = new FontSizeRange(
+                    layoutSettings.MinFontSize,
+                    layoutSettings.MaxFontSize);
 
-        var fontSizeRange = new FontSizeRange(
-            layoutSettings.MinFontSize,
-            layoutSettings.MaxFontSize);
-
-        var layouter = layouterFactory.Create();
-
-        var cloud = layouter.LayoutCloud(elements, fontSizeRange).Value;
-
-        visualizer.SaveToFile(cloud, visualizationSettings, outputFile);
+                var layouter = layouterFactory.Create();
+                return layouter.LayoutCloud(elements, fontRange);
+            })
+            .Then(layouted =>
+                visualizer.Visualize(layouted, visualizationSettings))
+            .Then(bitmap =>
+            {
+                using (bitmap)
+                {
+                    return imageSaver.Save(bitmap, outputFile);
+                }
+            });
     }
+
 
 }

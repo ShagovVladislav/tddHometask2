@@ -17,5 +17,5 @@ public interface ICloudGenerator
     ICloudGenerator WithFontFamily(string fontFamily);
     ICloudGenerator WithPadding(int padding);
     public ICloudGenerator WithLayouter(LayoutType layoutType);
-    void Generate();
+    Result Generate();
 }

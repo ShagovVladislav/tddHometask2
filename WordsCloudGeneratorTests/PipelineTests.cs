@@ -32,7 +32,7 @@ public class PipelineTests
             .Setup(l => l.Lemmatize(It.IsAny<string>()))
             .Returns<string>(w => Result<string>.Ok(w));
 
-        var processor = new WordProcessor(normalizer, stopWords, lemmatizerMock.Object);
+        var processor = new CloudElementsBuilder(normalizer, stopWords, lemmatizerMock.Object);
         var layouter = new RectangularCloudLayouter(new Size(600, 400), padding: 5);
         var visualizer = new CloudVisualizer();
         var fontRange = new FontSizeRange(20, 50);

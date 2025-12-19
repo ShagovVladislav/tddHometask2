@@ -7,7 +7,7 @@ using WordsCloudGenerator.Words.WordsInterfaces;
 namespace WordsCloudGeneratorTests;
 
 [TestFixture]
-public class WordProcessorTests
+public class CloudElementsBuilderTests
 {
     [Test]
     public void ProcessWords_ShouldNormalizeFilterLemmatizeAndGroup()
@@ -25,7 +25,7 @@ public class WordProcessorTests
         lemmatizer.Setup(l => l.Lemmatize(It.IsAny<string>()))
             .Returns<string>(w => Result<string>.Ok(w));
 
-        var processor = new WordProcessor(
+        var processor = new CloudElementsBuilder(
             normalizer.Object,
             stopWords.Object,
             lemmatizer.Object);
@@ -43,7 +43,7 @@ public class WordProcessorTests
     [Test]
     public void ProcessWords_ShouldFail_ForEmptyInput()
     {
-        var processor = new WordProcessor(
+        var processor = new CloudElementsBuilder(
             Mock.Of<IWordNormalizer>(),
             Mock.Of<IStopWordsFilter>(),
             Mock.Of<ILemmatizer>());

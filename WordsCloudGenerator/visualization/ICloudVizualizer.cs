@@ -8,9 +8,4 @@ public interface ICloudVisualizer
     Result<Bitmap> Visualize(
         IReadOnlyList<CloudElement> elements,
         VisualizationSettings settings);
-    
-    Result SaveToFile(
-        IReadOnlyList<CloudElement> elements,
-        VisualizationSettings settings,
-        string filePath);
 }

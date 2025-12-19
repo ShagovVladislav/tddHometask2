@@ -1,8 +1,6 @@
-﻿using System.Drawing;
-using Autofac;
+﻿using Autofac;
 using WordsCloudGenerator;
 using WordsCloudGenerator.layout;
-using WordsCloudGenerator.models;
 using WordsCloudGenerator.visualization;
 using WordsCloudGenerator.Words;
 using WordsCloudGenerator.Words.WordsInterfaces;
@@ -13,21 +11,16 @@ public class WordsCloudModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
-        builder.RegisterInstance(new WordsSettings())
-            .SingleInstance();
+        builder.RegisterType<WordsSettings>();
+        builder.RegisterType<LayoutSettings>();
+        builder.RegisterType<VisualizationSettings>();
 
-        builder.RegisterInstance(new LayoutSettings())
-            .SingleInstance();
-
-        builder.RegisterInstance(new VisualizationSettings())
-            .SingleInstance();
-
-        builder.RegisterType<CloudGenerator>()
-            .As<ICloudGenerator>();
-
-        
         builder.RegisterType<TextFileReader>()
             .As<IFileReader>();
+
+        builder.RegisterType<WordNormalizer>()
+            .As<IWordNormalizer>()
+            .SingleInstance();
 
         builder.Register(c =>
             {
@@ -38,10 +31,6 @@ public class WordsCloudModule : Module
                 return new StopWordsFilter(GetDefaultEnglishStopWords());
             })
             .As<IStopWordsFilter>()
-            .SingleInstance();
-
-        builder.RegisterType<WordNormalizer>()
-            .As<IWordNormalizer>()
             .SingleInstance();
 
         builder.Register(c =>
@@ -59,19 +48,22 @@ public class WordsCloudModule : Module
             .As<ILemmatizer>()
             .SingleInstance();
 
-        builder.RegisterType<WordProcessor>()
-            .As<IWordProcessor>();
+        builder.RegisterType<CloudElementsBuilder>()
+            .As<ICloudElementsBuilder>();
 
         builder.RegisterType<CloudLayouterFactory>()
-            .As<ICloudLayouterFactory>()
-            .SingleInstance();
+            .As<ICloudLayouterFactory>();
 
         builder.RegisterType<CloudVisualizer>()
             .As<ICloudVisualizer>();
 
+        builder.RegisterType<ImageFileSaver>()
+            .As<IImageSaver>();
+
         builder.RegisterType<CloudGenerator>()
             .As<ICloudGenerator>();
     }
+
 
     private static string[] GetDefaultEnglishStopWords()
     {

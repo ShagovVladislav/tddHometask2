@@ -2,7 +2,7 @@
 
 namespace WordsCloudGenerator.Words.WordsInterfaces;
 
-public interface IWordProcessor
+public interface ICloudElementsBuilder
 {
     Result<CloudElement[]> ProcessWords(string[] rawWords);
 }

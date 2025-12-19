@@ -22,6 +22,9 @@ public class Result<T>
     public Result<TResult> Map<TResult>(Func<T, TResult> func)
         => IsSuccess ? Result<TResult>.Ok(func(Value)) : Result<TResult>.Fail(Error);
     
+    public Result Then(Func<T, Result> func)
+        => IsSuccess ? func(Value) : Result.Fail(Error);
+
     public T OnFailure(T defaultValue)
         => IsSuccess ? Value : defaultValue;
     

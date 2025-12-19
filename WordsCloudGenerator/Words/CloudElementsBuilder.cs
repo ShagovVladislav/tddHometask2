@@ -1,16 +1,15 @@
 ﻿using WordsCloudGenerator.models;
 using WordsCloudGenerator.Words.WordsInterfaces;
-using IWordProcessor = WordsCloudGenerator.Words.WordsInterfaces.IWordProcessor;
 
 namespace WordsCloudGenerator.Words;
 
-public class WordProcessor : IWordProcessor
+public class CloudElementsBuilder : ICloudElementsBuilder
 {
     private readonly IWordNormalizer _normalizer;
     private readonly IStopWordsFilter _stopWordsFilter;
     private readonly ILemmatizer _lemmatizer;
     
-    public WordProcessor(
+    public CloudElementsBuilder(
         IWordNormalizer normalizer,
         IStopWordsFilter stopWordsFilter,
         ILemmatizer lemmatizer)
