@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace WordsCloudGenerator.vizualization;
+namespace WordsCloudGenerator.visualization;
 
 public static class PaletteGenerator
 {

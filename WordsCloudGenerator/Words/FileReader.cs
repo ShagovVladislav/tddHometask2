@@ -1,18 +1,43 @@
-﻿using WordsCloudGenerator.Words.WordsInterfaces;
+﻿using WordsCloudGenerator.models;
+using WordsCloudGenerator.Words.WordsInterfaces;
 
 namespace WordsCloudGenerator.Words;
 
-public class FileReader : IFileReader
+public class TextFileReader : IFileReader
 {
-    public string[] Read(string path)
+    public Result<string[]> ReadWords(string filePath)
     {
+        if (string.IsNullOrWhiteSpace(filePath))
+            return Result<string[]>.Fail("File path cannot be null or empty");
+        
         try
         {
-            return File.ReadAllLines(path);
+            if (!File.Exists(filePath))
+                return Result<string[]>.Fail($"File not found: {filePath}");
+            
+            var lines = File.ReadAllLines(filePath);
+            
+            var words = lines
+                .Select(line => line.Trim())
+                .Where(line => !string.IsNullOrEmpty(line))
+                .SelectMany(line => line.Split(' ', StringSplitOptions.RemoveEmptyEntries))
+                .Select(word => word.Trim())
+                .Where(word => !string.IsNullOrEmpty(word))
+                .ToArray();
+            
+            return Result<string[]>.Ok(words);
         }
-        catch (Exception e)
+        catch (UnauthorizedAccessException ex)
         {
-            throw new FileNotFoundException("File not found", path);
+            return Result<string[]>.Fail($"Access denied to file: {filePath}. {ex.Message}");
+        }
+        catch (IOException ex)
+        {
+            return Result<string[]>.Fail($"I/O error reading file: {filePath}. {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            return Result<string[]>.Fail($"Unexpected error reading file: {filePath}. {ex.Message}");
         }
     }
 }

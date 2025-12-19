@@ -5,7 +5,7 @@ public class WordsSettings
     public string StopWordsFilePath { get; set; }
     public string HunspellAffPath { get; set; }
     public string HunspellDicPath { get; set; }
-    public int MinWordLength { get; set; }
+    public static int MinWordLength { get; set; }
     
     public WordsSettings()
     {

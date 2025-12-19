@@ -33,6 +33,9 @@ pink pink pink brown
 black black black white
 gray gray gray silver
 gold gold gold bronze
+gold gold gold
+gold gold gold
+gold gold gold
 copper copper copper brass
 steel steel steel iron
 aluminum aluminum aluminum titanium
@@ -68,3 +71,18 @@ copernicium copernicium copernicium nihonium
 flerovium flerovium flerovium moscovium
 livermorium livermorium livermorium tennessine
 oganesson oganesson oganesson
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d

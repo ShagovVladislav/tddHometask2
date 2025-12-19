@@ -2,11 +2,11 @@
 
 namespace WordsCloudGenerator.Words;
 
-public class SimpleStopWordsFilter : IStopWordsFilter
+public class StopWordsFilter : IStopWordsFilter
 {
     private readonly HashSet<string> _stopWords;
     
-    public SimpleStopWordsFilter(IEnumerable<string> stopWords)
+    public StopWordsFilter(IEnumerable<string> stopWords)
     {
         _stopWords = new HashSet<string>(
             stopWords?.Select(w => w.Trim().ToLowerInvariant()) 

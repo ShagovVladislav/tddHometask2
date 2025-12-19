@@ -9,7 +9,7 @@ public partial class WordNormalizer : IWordNormalizer
     
     public string Normalize(string word)
     {
-        return string.IsNullOrWhiteSpace(word) 
+        return string.IsNullOrWhiteSpace(word) || word.Length<WordsSettings.MinWordLength
             ? string.Empty 
             : CleaningRegex.Replace(word.ToLowerInvariant(), "").Trim();
     }

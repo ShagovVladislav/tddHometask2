@@ -1,6 +1,8 @@
-﻿namespace WordsCloudGenerator.Words.WordsInterfaces;
+﻿using WordsCloudGenerator.models;
+
+namespace WordsCloudGenerator.Words.WordsInterfaces;
 
 public interface IFileReader
 {
-    public string[] Read(string path);
+    Result<string[]> ReadWords(string path);
 }

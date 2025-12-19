@@ -19,8 +19,22 @@ public class Result<T>
     public Result<TResult> Then<TResult>(Func<T, Result<TResult>> func)
         => IsSuccess ? func(Value) : Result<TResult>.Fail(Error);
     
+    public Result<TResult> Map<TResult>(Func<T, TResult> func)
+        => IsSuccess ? Result<TResult>.Ok(func(Value)) : Result<TResult>.Fail(Error);
+    
     public T OnFailure(T defaultValue)
         => IsSuccess ? Value : defaultValue;
+    
+    public T OnFailure(Func<T> defaultValueFactory)
+        => IsSuccess ? Value : defaultValueFactory();
+    
+    public void Match(Action<T> onSuccess, Action<string> onFailure)
+    {
+        if (IsSuccess)
+            onSuccess(Value);
+        else
+            onFailure(Error);
+    }
 }
 
 public class Result
@@ -36,4 +50,18 @@ public class Result
     
     public static Result Ok() => new Result(true, null);
     public static Result Fail(string error) => new Result(false, error);
+    
+    public Result<T> Then<T>(Func<Result<T>> func)
+        => IsSuccess ? func() : Result<T>.Fail(Error);
+    
+    public Result Then(Func<Result> func)
+        => IsSuccess ? func() : Fail(Error);
+    
+    public void Match(Action onSuccess, Action<string> onFailure)
+    {
+        if (IsSuccess)
+            onSuccess();
+        else
+            onFailure(Error);
+    }
 }

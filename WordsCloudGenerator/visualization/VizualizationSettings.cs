@@ -16,16 +16,4 @@ public class VisualizationSettings
         Color.DarkOrange
     };
     public int Padding { get; set; } = 20;
-    
-    public void Validate()
-    {
-        if (ImageSize.Width <= 0 || ImageSize.Height <= 0)
-            throw new ArgumentException("Image size must be positive");
-        
-        if (string.IsNullOrWhiteSpace(FontName))
-            throw new ArgumentException("Font name cannot be empty");
-        
-        if (Padding < 0)
-            throw new ArgumentException("Padding cannot be negative");
-    }
 }
