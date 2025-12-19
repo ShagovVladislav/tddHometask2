@@ -48,15 +48,10 @@ public class RectangleForm : IPointProvider
             var x = center.X + dx * step;
             var y = center.Y + dy * step;
 
-            if (Math.Abs(dx * step) > maxRadiusX ||
-                Math.Abs(dy * step) > maxRadiusY)
-            {
-                layer++;
-                index = 0;
-                continue;
-            }
-
-            return new Point(x, y);
+            if (Math.Abs(dx * step) <= maxRadiusX &&
+                Math.Abs(dy * step) <= maxRadiusY) return new Point(x, y);
+            layer++;
+            index = 0;
         }
     }
 }

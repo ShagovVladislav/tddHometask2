@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "di", "FractalPainter/di.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordsCloudGenerator", "WordsCloudGenerator\WordsCloudGenerator.csproj", "{009B693F-0688-4F5C-811D-D659C3923C74}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordsCloudGeneratorTests", "WordsCloudGeneratorTests\WordsCloudGeneratorTests.csproj", "{5C14CA55-323A-4B4A-B5A3-21188929266C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppWordsCloud", "ConsoleAppWordsCloud\ConsoleAppWordsCloud.csproj", "{7C845B0B-EB3B-4A24-9532-2414D5FCBA73}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{009B693F-0688-4F5C-811D-D659C3923C74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{009B693F-0688-4F5C-811D-D659C3923C74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{009B693F-0688-4F5C-811D-D659C3923C74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C14CA55-323A-4B4A-B5A3-21188929266C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C14CA55-323A-4B4A-B5A3-21188929266C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C14CA55-323A-4B4A-B5A3-21188929266C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C14CA55-323A-4B4A-B5A3-21188929266C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C845B0B-EB3B-4A24-9532-2414D5FCBA73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C845B0B-EB3B-4A24-9532-2414D5FCBA73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C845B0B-EB3B-4A24-9532-2414D5FCBA73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C845B0B-EB3B-4A24-9532-2414D5FCBA73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

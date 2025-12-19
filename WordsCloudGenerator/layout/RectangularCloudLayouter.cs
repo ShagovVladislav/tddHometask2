@@ -119,7 +119,7 @@ public sealed class RectangularCloudLayouter : ICloudLayouter
             totalArea += rectWidth * rectHeight;
         }
 
-        totalArea *= 1.2;
+        totalArea *= 1.5;
 
         var height = (int)Math.Sqrt(totalArea / 2);
         var width = height * 2;

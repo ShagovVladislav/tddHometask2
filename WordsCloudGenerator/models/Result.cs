@@ -56,12 +56,4 @@ public class Result
     
     public Result Then(Func<Result> func)
         => IsSuccess ? func() : Fail(Error);
-    
-    public void Match(Action onSuccess, Action<string> onFailure)
-    {
-        if (IsSuccess)
-            onSuccess();
-        else
-            onFailure(Error);
-    }
 }
