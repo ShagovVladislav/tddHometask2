@@ -32,6 +32,7 @@ public sealed class CircularCloudLayouter : ICloudLayouter
         this.center = center;
         centerX = center.X;
         centerY = center.Y;
+        Spiral = new Spiral(center);
     }
 
     public Result<Rectangle> PutNextRectangle(Size rectangleSize)

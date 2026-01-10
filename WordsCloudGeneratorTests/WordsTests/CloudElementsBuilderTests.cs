@@ -4,7 +4,7 @@ using WordsCloudGenerator.models;
 using WordsCloudGenerator.Words;
 using WordsCloudGenerator.Words.WordsInterfaces;
 
-namespace WordsCloudGeneratorTests;
+namespace WordsCloudGeneratorTests.WordsTests;
 
 [TestFixture]
 public class CloudElementsBuilderTests
@@ -17,10 +17,10 @@ public class CloudElementsBuilderTests
         var lemmatizer = new Mock<ILemmatizer>();
 
         normalizer.Setup(n => n.Normalize(It.IsAny<string>()))
-            .Returns<string>(w => w.ToLower());
+            .Returns<string>(w => Result<string>.Ok(w.ToLower()));
 
         stopWords.Setup(f => f.IsStopWord("and")).Returns(true);
-        stopWords.Setup(f => f.IsStopWord(It.Is<string>(w => w != "and"))).Returns(false);
+        stopWords.Setup(f => f.IsStopWord("cloud")).Returns(false);
 
         lemmatizer.Setup(l => l.Lemmatize(It.IsAny<string>()))
             .Returns<string>(w => Result<string>.Ok(w));
@@ -36,9 +36,12 @@ public class CloudElementsBuilderTests
 
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().HaveCount(1);
-        result.Value[0].Word.Should().Be("cloud");
-        result.Value[0].Frequency.Should().Be(2);
+
+        var element = result.Value[0];
+        element.Word.Should().Be("cloud");
+        element.Frequency.Should().Be(2);
     }
+
 
     [Test]
     public void ProcessWords_ShouldFail_ForEmptyInput()

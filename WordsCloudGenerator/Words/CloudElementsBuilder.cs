@@ -21,39 +21,40 @@ public class CloudElementsBuilder : ICloudElementsBuilder
     
     public Result<CloudElement[]> ProcessWords(string[] rawWords)
     {
-        try
-        {
-            if (rawWords.Length == 0)
-                return Result<CloudElement[]>.Fail("Input words cannot be empty");
-            
-            var normalizedWords = rawWords
-                .Select(w => _normalizer.Normalize(w))
-                .Where(w => !string.IsNullOrEmpty(w))
-                .ToArray();
-            
-            var filteredWords = normalizedWords
-                .Where(w => !_stopWordsFilter.IsStopWord(w))
-                .ToArray();
-            
-            var lemmatizedWords = filteredWords
-                .Select(w => _lemmatizer.Lemmatize(w))
-                .Where(result => result.IsSuccess)
-                .Select(result => result.Value)
-                .Where(w => !string.IsNullOrEmpty(w))
-                .ToArray();
-            
-            var wordGroups = lemmatizedWords
-                .GroupBy(w => w)
-                .Select(g => new CloudElement(g.Key, g.Count()))
-                .OrderByDescending(e => e.Frequency)
-                .ThenBy(e => e.Word)
-                .ToArray();
-            
-            return Result<CloudElement[]>.Ok(wordGroups);
-        }
-        catch (Exception ex)
-        {
-            return Result<CloudElement[]>.Fail($"Word processing failed: {ex.Message}");
-        }
+        if (rawWords.Length == 0)
+            return Result<CloudElement[]>.Fail("Input words cannot be empty");
+
+        var normalized = rawWords
+            .Select(w => _normalizer.Normalize(w))
+            .ToArray();
+
+        var normalizationError = normalized.FirstOrDefault(r => !r.IsSuccess);
+        if (normalizationError != null)
+            return Result<CloudElement[]>.Fail(normalizationError.Error);
+
+        var filtered = normalized
+            .Select(r => r.Value)
+            .Where(w => !string.IsNullOrWhiteSpace(w))
+            .Where(w => !_stopWordsFilter.IsStopWord(w))
+            .ToArray();
+
+        var lemmatized = filtered
+            .Select(w => _lemmatizer.Lemmatize(w))
+            .ToArray();
+
+        var lemmatizationError = lemmatized.FirstOrDefault(r => !r.IsSuccess);
+        if (lemmatizationError != null)
+            return Result<CloudElement[]>.Fail(lemmatizationError.Error);
+
+        var result = lemmatized
+            .Select(r => r.Value)
+            .Where(w => !string.IsNullOrWhiteSpace(w))
+            .GroupBy(w => w)
+            .Select(g => new CloudElement(g.Key, g.Count()))
+            .OrderByDescending(e => e.Frequency)
+            .ThenBy(e => e.Word)
+            .ToArray();
+
+        return Result<CloudElement[]>.Ok(result);
     }
 }

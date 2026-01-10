@@ -199,11 +199,12 @@ public sealed class ConsoleSettingsUI
             ? LayoutType.Rectangular
             : LayoutType.Circular;
     }
-
+    
     private void SetCanvas()
     {
         Console.Write("\nВведите ширину (0 = auto): ");
-        var w = int.Parse(Console.ReadLine() ?? "0");
+        if (!int.TryParse(Console.ReadLine(), out var w) || w < 0)
+            return;
 
         if (w == 0)
         {
@@ -212,8 +213,10 @@ public sealed class ConsoleSettingsUI
         }
 
         Console.Write("Введите высоту: ");
-        var h = int.Parse(Console.ReadLine() ?? "0");
+        if (!int.TryParse(Console.ReadLine(), out var h) || h <= 0)
+            return;
 
         settings.CanvasSize = new Size(w, h);
     }
+
 }

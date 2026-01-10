@@ -29,11 +29,11 @@ public class TextFileReader : IFileReader
         }
         catch (UnauthorizedAccessException ex)
         {
-            return Result<string[]>.Fail($"Access denied to file: {filePath}. {ex.Message}");
+            return Result<string[]>.Fail($"Access denied to file: {filePath}.");
         }
         catch (IOException ex)
         {
-            return Result<string[]>.Fail($"I/O error reading file: {filePath}. {ex.Message}");
+            return Result<string[]>.Fail($"I/O error reading file: {filePath}. Try to close file if it open.");
         }
         catch (Exception ex)
         {

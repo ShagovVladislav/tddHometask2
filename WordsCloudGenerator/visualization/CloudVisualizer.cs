@@ -58,7 +58,7 @@ public class CloudVisualizer : ICloudVisualizer
                 g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
                 g.Clear(settings.BackgroundColor);
                 
-                var shiftResult = ShiftElementsToCanvas(elements, imageSize, settings.Padding);
+                var shiftResult = ShiftElementsToCanvas(elements, settings.Padding);
                 if (!shiftResult.IsSuccess)
                 {
                     bitmap.Dispose();
@@ -121,7 +121,7 @@ public class CloudVisualizer : ICloudVisualizer
             
             using var bitmap = visualizeResult.Value;
             
-            var extension = Path.GetExtension(filePath)?.ToLowerInvariant();
+            var extension = Path.GetExtension(filePath).ToLowerInvariant();
             var imageFormat = extension switch
             {
                 ".png" => System.Drawing.Imaging.ImageFormat.Png,
@@ -155,7 +155,7 @@ public class CloudVisualizer : ICloudVisualizer
         
         try
         {
-            var shiftedResult = ShiftElementsToCanvas(elements, new Size(int.MaxValue, int.MaxValue), padding);
+            var shiftedResult = ShiftElementsToCanvas(elements, padding);
             if (!shiftedResult.IsSuccess)
                 return Result<Size>.Fail(shiftedResult.Error);
                 
@@ -182,7 +182,6 @@ public class CloudVisualizer : ICloudVisualizer
     
     private Result<List<CloudElement>> ShiftElementsToCanvas(
         IReadOnlyList<CloudElement> elements,
-        Size imageSize,
         int padding)
     {
         if (elements.Count == 0)

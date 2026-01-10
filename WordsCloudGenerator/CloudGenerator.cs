@@ -116,13 +116,13 @@ public class CloudGenerator : ICloudGenerator
             .Then(words =>
                 cloudElementsBuilder.ProcessWords(words))
             .Then(elements =>
-            {
+            {   
                 var fontRange = new FontSizeRange(
                     layoutSettings.MinFontSize,
                     layoutSettings.MaxFontSize);
 
-                var layouter = layouterFactory.Create();
-                return layouter.LayoutCloud(elements, fontRange);
+                return layouterFactory.Create()
+                    .Then(layouter => layouter.LayoutCloud(elements, fontRange));
             })
             .Then(layouted =>
                 visualizer.Visualize(layouted, visualizationSettings))

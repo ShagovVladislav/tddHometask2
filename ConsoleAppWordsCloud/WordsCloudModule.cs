@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using WordsCloudGenerator;
 using WordsCloudGenerator.layout;
+using WordsCloudGenerator.models;
 using WordsCloudGenerator.visualization;
 using WordsCloudGenerator.Words;
 using WordsCloudGenerator.Words.WordsInterfaces;
@@ -40,13 +41,11 @@ public class WordsCloudModule : Module
                     settings.HunspellAffPath,
                     settings.HunspellDicPath);
 
-                if (!result.IsSuccess)
-                    throw new InvalidOperationException(result.Error);
-
-                return result.Value;
+                return !result.IsSuccess ? throw new InvalidOperationException(result.Error) : result.Value;
             })
             .As<ILemmatizer>()
             .SingleInstance();
+
 
         builder.RegisterType<CloudElementsBuilder>()
             .As<ICloudElementsBuilder>();

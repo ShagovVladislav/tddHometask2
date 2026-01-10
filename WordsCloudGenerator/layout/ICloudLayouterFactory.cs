@@ -1,6 +1,8 @@
-﻿namespace WordsCloudGenerator.layout;
+﻿using WordsCloudGenerator.models;
+
+namespace WordsCloudGenerator.layout;
 
 public interface ICloudLayouterFactory
 {
-    ICloudLayouter Create();
+    Result<ICloudLayouter> Create();
 }

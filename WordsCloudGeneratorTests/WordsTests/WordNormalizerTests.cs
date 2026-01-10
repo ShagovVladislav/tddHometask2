@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using WordsCloudGenerator.Words;
 
-namespace WordsCloudGeneratorTests;
+namespace WordsCloudGeneratorTests.WordsTests;
 
 [TestFixture]
 public class WordNormalizerTests
@@ -13,7 +13,7 @@ public class WordNormalizerTests
 
         var result = normalizer.Normalize("HeLLo!!!");
 
-        result.Should().Be("hello");
+        result.Value.Should().Be("hello");
     }
 
     [Test]
@@ -24,7 +24,8 @@ public class WordNormalizerTests
         
         var result = normalizer.Normalize("a");
 
-        result.Should().BeEmpty();
+        result.IsSuccess.Should().BeTrue();
+        result.Value.Should().BeEmpty();
     }
 
     [Test]
@@ -34,6 +35,7 @@ public class WordNormalizerTests
 
         var result = normalizer.Normalize("   ");
 
-        result.Should().BeEmpty();
+        result.IsSuccess.Should().BeTrue();
+        result.Value.Should().BeEmpty();
     }
 }

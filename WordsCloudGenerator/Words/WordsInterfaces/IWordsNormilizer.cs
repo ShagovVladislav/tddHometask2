@@ -1,6 +1,8 @@
-﻿namespace WordsCloudGenerator.Words.WordsInterfaces;
+﻿using WordsCloudGenerator.models;
+
+namespace WordsCloudGenerator.Words.WordsInterfaces;
 
 public interface IWordNormalizer
 {
-    string Normalize(string word);
+    Result<string> Normalize(string word);
 }
